@@ -1,4 +1,4 @@
-<?php include 'main.php'; ?>
+<?php include 'input-controller.php'; ?>
 
 <html>
 <head>
@@ -33,9 +33,10 @@
 		
 		<div class='row'><div class='col-md-6 col-md-offset-3'>
 			<form method='post'>
-				<div class='form-group'>
+				<div class="form-group has-feedback <?php if($errors['name']) { echo 'has-error'; } ?>">
 					<label>Requestor</label>
-					<input name='name' type='text' class='form-control' placeholder='Your name'>
+					<input name='name' type='text' class='form-control' value='<?php echo $inputs['name']; ?>' placeholder='Your name'>
+					<?php echo getFormFeedback($errors['name']); ?>
 				</div>
 
 				<div class='form-group'>
@@ -47,24 +48,28 @@
 					</select>
 				</div>
 
-				<div class='form-group'>
+				<div class="form-group has-feedback <?php if($errors['title']) { echo 'has-error'; } ?>">
 					<label>Title</label>
-					<input name='title' type='text' class='form-control' placeholder='Short description of request'>
+					<input name='title' type='text' class='form-control' value='<?php echo $inputs['title']; ?>' placeholder='Short description of request' >
+					<?php echo getFormFeedback($errors['title']); ?>
 				</div>
 
-				<div class='form-group'>
+				<div class="form-group has-feedback <?php if($errors['due']) { echo 'has-error'; } ?>">
 					<label>When do you need it?</label>
-					<input name='due' type='text' class='form-control' placeholder='Accepts most date formats. You can also type "2 weeks", "next Monday", etc.'>
+					<input name='due' type='text' class='form-control' value='<?php echo $inputs['due']; ?>' placeholder='Accepts most date formats. You can also type "2 weeks", "next Monday", etc.'>
+					<?php echo getFormFeedback($errors['due']); ?>
 				</div>
 
-				<div class='form-group'>
+				<div class="form-group has-feedback <?php if($errors['background']) { echo 'has-error'; } ?>">
 					<label>Background</label>
-					<textarea name='background' class='form-control' rows='5' placeholder='Describe the request background and deliverables using clear and consise language.'></textarea>
+					<textarea name='background' class='form-control' rows='5' placeholder='Include any supporting information that will be necessary or helpful to complete this request.'><?php echo $inputs['background']; ?></textarea>
+					<?php echo getFormFeedback($errors['background']); ?>
 				</div>
 
-				<div class='form-group'>
+				<div class="form-group has-feedback <?php if($errors['deliverables']) { echo 'has-error'; } ?>">
 					<label>Deliverables</label>
-					<textarea name='deliverables' class='form-control' rows='5' placeholder='Describe the request background and deliverables using clear and consise language.'></textarea>
+					<textarea name='deliverables' class='form-control' rows='5' placeholder='What are we providing? Be specific and clear.'><?php echo $inputs['deliverables']; ?></textarea>
+					<?php echo getFormFeedback($errors['deliverables']); ?>
 				</div>
 
 				<input name='submit' type='submit' class='btn btn-primary' value='Submit'>

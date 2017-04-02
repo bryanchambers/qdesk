@@ -5,7 +5,7 @@ function processInput() {
 		$inputs = getInputs();
 		$errors = getInputErrors($inputs);
 
-		return ('inputs' => $inputs, 'errors' => $errors);
+		return ['inputs' => $inputs, 'errors' => $errors];
 	}
 }
 
@@ -39,8 +39,8 @@ function getInputErrors($inputs) {
 	$err['background']   = getTextErrors('background', $inputs['background'], 1000, false);
 	$err['deliverables'] = getTextErrors('deliverables', $inputs['deliverables'], 1000, false);
 
-	if($input['date'] != '') {
-		if(strtotime($input['due'])) {
+	if($inputs['due'] != '') {
+		if(strtotime($inputs['due'])) {
 			//Valid date
 		}
 		else { $err['due'] = 'Invalid date'; }
@@ -75,4 +75,16 @@ function getTextErrors($key, $text, $max, $alpha) {
 		else { return ucfirst($key) . " must be less than $max characters"; }
 	}
 	else { return ucfirst($key) . " cannot be blank"; }
+}
+
+
+
+
+
+function getFormFeedback($error) {
+	if($error) {
+		$icon = "<span class='glyphicon glyphicon-remove form-control-feedback'></span>";					
+		$text = "<p class='help-block'>$error</p>";
+	}
+	return $icon . $text;
 }
